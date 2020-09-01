@@ -16,6 +16,8 @@ import java.util.Optional;
 public class SupplierServiceImpl implements ISupplierService{
 	
 
+    @Autowired
+    private MongoTemplate mongo;
 
     @Autowired
     private ISupplierDao dao;
