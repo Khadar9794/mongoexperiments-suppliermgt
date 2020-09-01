@@ -15,6 +15,8 @@ public interface ISupplierService {
     List<Supplier>findByName(String name);
 
 	List<Supplier> findAll();
+
+	List<Supplier> findByName1(String name);
 	
 
 	

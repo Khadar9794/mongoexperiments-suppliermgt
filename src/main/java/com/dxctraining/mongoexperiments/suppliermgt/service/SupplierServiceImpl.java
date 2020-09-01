@@ -7,6 +7,8 @@ import com.dxctraining.mongoexperiments.suppliermgt.dao.ISupplierDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +36,16 @@ public class SupplierServiceImpl implements ISupplierService{
         List<Supplier>list=dao.findByName(name);
         return list;
     }
+    
+    @Override
+	public List<Supplier> findByName1(String name) {
+		Criteria criteria = Criteria.where("name").is(name);
+		Query query = Query.query(criteria);
+		List<Supplier> list = mongo.find(query, Supplier.class);
+		return list;
+	}
 
-
+    
     @Override
     public Supplier findById(String id) {
       Optional<Supplier>optional= dao.findById(id);
@@ -51,4 +61,11 @@ public class SupplierServiceImpl implements ISupplierService{
     public void removeById(String id) {
        dao.deleteById(id);
     }
+    
+    @Override
+	public List<Supplier> findAll() {
+		List<Supplier> list = mongo.findAll(Supplier.class);
+		return list;
+	}
+
 }
